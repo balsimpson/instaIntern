@@ -127,15 +127,16 @@ function getOptions(text) {
 
     // extract content
     // @ts-ignore
-    option.content = lines[i + 1].match(/Content: (.+)/)[1];
+    option.content = lines[i + 1].match(/Content:(.+)/)[1];
 
     // extract image URL
     // @ts-ignore
-    option.image = lines[i + 2].match(/Image: (.+)/)[1];
+    // console.log(option);
+    option.image = "" || lines[i + 2]?.match(/Image: (.+)/)[1];
 
     // extract hashtags
     // @ts-ignore
-    option.hashtags = lines[i + 3].match(/Hashtags: (.+)/)[1].split(" ");
+    option.hashtags = lines[i + 3]?.match(/Hashtags: (.+)/)[1].split(" ");
 
     // add option to options array
     options.push(option);

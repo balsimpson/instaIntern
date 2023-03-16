@@ -7,7 +7,7 @@
         class="flex flex-col w-full pb-2 flex-grow pt-2  relative border border-indigo-900/50  bg-transparent rounded-md shadow-[0_0_15px_rgba(0,0,0,0.10)]">
 
         <textarea @keyup.enter.prevent="emit('clicked', inputText)" @input="adjustTextareaHeight" ref="textarea" tabindex="0" rows="1"
-          placeholder="e.g. sustainability in millet farming"
+          placeholder="e.g. new admissions now open at Glendale"
           class="w-full p-0 pl-3 m-0 bg-transparent border-0 resize-none pr-7 focus:ring-0 focus-visible:ring-0 focus:outline-none"
           v-model="inputText"></textarea>
 
