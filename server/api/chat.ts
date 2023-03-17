@@ -1,5 +1,9 @@
 import { Configuration, OpenAIApi } from "openai"
 
+export const config = {
+  runtime: 'edge',
+};
+
 export default defineEventHandler(async (event) => {
   interface ChatResponse {
     message: string | undefined;
@@ -32,7 +36,7 @@ export default defineEventHandler(async (event) => {
     });
 
 
-    console.log("prediction", JSON.stringify(prediction.data.choices[0].message))
+    // console.log("prediction", JSON.stringify(prediction.data.choices[0].message))
 
     const response: ChatResponse = {
       // @ts-ignore
