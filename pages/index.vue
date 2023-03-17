@@ -39,6 +39,7 @@
 
     <div v-else class="h-full">
       <div class="h-full max-w-xl mx-auto ">
+        <pre>{{ messages }}</pre>
         <AppCarousel :items="instaOptions" />
       </div>
     </div>
