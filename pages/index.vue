@@ -54,9 +54,9 @@ const messages = ref([])
 const instaOptions = ref([])
 
 // @ts-ignore
-const startChat = async (data) => {
+const startChat = async (prompt) => {
 
-  console.log(data);
+  console.log(prompt);
   const msgs = [
     {
       "role": "system",
@@ -64,18 +64,18 @@ const startChat = async (data) => {
     },
     {
       "role": "user",
-      "content": data,
+      "content": prompt,
     }
   ]
 
   // @ts-ignore
-  const prediction: { message: { content: string } } = await getPrediction(msgs)
+  const prediction: string = await getPrediction(prompt)
 
   console.log("instaOptions", instaOptions.value);
 
   const res = {
     "role": "assistant",
-    "content": prediction.message.content.trim(),
+    "content": prediction,
   }
 
   // @ts-ignore
@@ -84,32 +84,19 @@ const startChat = async (data) => {
   messages.value.push(res)
 
   // @ts-ignore
-  instaOptions.value = getOptions(prediction.message.content.trim())
+  instaOptions.value = getOptions(prediction.trim())
   console.log("instaOptions", instaOptions.value);
   // saveChat()
 
   localStorage.setItem('instaintern-chat_current', JSON.stringify(messages.value))
 }
 
-const getPrediction = async (messages: [{
-  role: string,
-  content: string,
-}]) => {
+const getPrediction = async (prompt: string) => {
   try {
-    let { data } = await useFetch(`https://chatgpt.cyclic.app/chat`, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        messages: messages,
-        secret: "floppyfoxy"
-      })
-    })
+    let { data } = await useFetch(`https://chatgpt.cyclic.app/chat?secret=floppyfoxy&prompt=${prompt}`)
     // console.log("pending", pending.value)
     console.log("data", data.value)
-    return data
+    return data.value
   } catch (error) {
     console.log("error:", error)
   }
