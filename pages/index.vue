@@ -72,17 +72,17 @@ const startChat = async (data) => {
   const prediction: { message: { content: string } } = await getPrediction(msgs)
 
   console.log("instaOptions", instaOptions.value);
-  
+
   const res = {
     "role": "assistant",
     "content": prediction.message.content.trim(),
   }
-  
+
   // @ts-ignore
   messages.value = msgs
   // @ts-ignore
   messages.value.push(res)
-  
+
   // @ts-ignore
   instaOptions.value = getOptions(prediction.message.content.trim())
   console.log("instaOptions", instaOptions.value);
@@ -96,8 +96,9 @@ const getPrediction = async (messages: [{
   content: string,
 }]) => {
   try {
-    let data = await useFetch(`https://chatgpt.cyclic.app/chat`, {
+    let { data } = await useFetch(`https://chatgpt.cyclic.app/chat`, {
       method: "POST",
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json"
       },
@@ -107,7 +108,7 @@ const getPrediction = async (messages: [{
       })
     })
     // console.log("pending", pending.value)
-    console.log("data", data)
+    console.log("data", data.value)
     return data
   } catch (error) {
     console.log("error:", error)
