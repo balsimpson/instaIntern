@@ -163,7 +163,7 @@ const setSlideWidth = () => {
 
 onMounted(() => {
   // console.log(props.items)
-  // setSlideWidth();
+  setSlideWidth();
 
   slidesElement.value.children[0].classList.add("current-slide");
 
