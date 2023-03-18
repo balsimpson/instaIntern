@@ -96,14 +96,19 @@ const getPrediction = async (messages: [{
   content: string,
 }]) => {
   try {
-    let { data, pending, error } = await useFetch(`/api/chat`, {
+    let data = await useFetch(`https://chatgpt.cyclic.app/chat`, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         messages: messages,
+        secret: "floppyfoxy"
       })
     })
-    console.log("pending", pending.value)
-    return data.value
+    // console.log("pending", pending.value)
+    console.log("data", data)
+    return data
   } catch (error) {
     console.log("error:", error)
   }
